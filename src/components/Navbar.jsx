@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,6 +7,8 @@ import {
   Box,
   InputBase,
   Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import PetsIcon from "@mui/icons-material/Pets";
 import Badge from "@mui/material/Badge";
@@ -43,6 +45,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 export const Navbar = () => {
+  const [open, setOpen] = useState(false);
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -63,9 +66,10 @@ export const Navbar = () => {
           <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
+            onClick={(e) => setOpen(true)}
           />
         </Icons>
-        <UserBox>
+        <UserBox onClick={(e) => setOpen(true)}>
           <Avatar
             sx={{ width: 30, height: 30 }}
             src="https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
@@ -73,6 +77,24 @@ export const Navbar = () => {
           <Typography variant="span">Dipesh</Typography>
         </UserBox>
       </StyledToolbar>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={(e) => setOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My account</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
     </AppBar>
   );
 };
